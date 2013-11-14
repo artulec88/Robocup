@@ -8,75 +8,75 @@
 namespace Maths 
 {
 	template <typename Type>
-	class Vector2D
+	class MATHS_API Vector2D
 	{
 	public: // constructors and destructors
-		MATHS_API Vector2D();
-		MATHS_API Vector2D(Type x, Type y);
+		Vector2D();
+		Vector2D(Type x, Type y);
 	public: // public member functions
-		MATHS_API Type GetX() const;
-		MATHS_API Type GetY() const;
-		MATHS_API void SetX(Type x);
-		MATHS_API void SetY(Type y);
+		Type GetX() const;
+		Type GetY() const;
+		void SetX(Type x);
+		void SetY(Type y);
 
-		MATHS_API std::string ToString() const;
-		MATHS_API Type Length() const;
-		MATHS_API Type LengthSquared() const;
+		std::string ToString() const;
+		Type Length() const;
+		Type LengthSquared() const;
 
-		MATHS_API void Negate(); // creates negation vector
+		void Negate(); // creates negation vector
 
-		MATHS_API Vector2D operator+(const Vector2D& v) const;
-		MATHS_API Vector2D operator-(const Vector2D& v) const;
-		MATHS_API Vector2D operator*(Type s) const;
-		MATHS_API Vector2D operator/(Type s) const;
+		Vector2D operator+(const Vector2D& v) const;
+		Vector2D operator-(const Vector2D& v) const;
+		Vector2D operator*(Type s) const;
+		Vector2D operator/(Type s) const;
 
-		MATHS_API Vector2D Normalized() const;
-		MATHS_API void Normalize();
+		Vector2D Normalized() const;
+		void Normalize();
 
-		MATHS_API Type Dot(const Vector2D& v) const;
+		Type Dot(const Vector2D& v) const;
 	protected: // member variables
 		Type x;
 		Type y;
 	};
 
 	template <typename Type>
-	class Vector3D
+	class MATHS_API Vector3D
 	{
 	protected: // member variables
 		Type x;
 		Type y;
 		Type z;
 	public: // constructors and destructors
-		MATHS_API Vector3D();
-		MATHS_API Vector3D(Type x, Type y, Type z);
+		Vector3D();
+		Vector3D(Type x, Type y, Type z);
 	public: // public member functions
-		MATHS_API Type GetX() const;
-		MATHS_API Type GetY() const;
-		MATHS_API Type GetZ() const;
-		MATHS_API void SetX(Type x);
-		MATHS_API void SetY(Type y);
-		MATHS_API void SetZ(Type z);
+		Type GetX() const;
+		Type GetY() const;
+		Type GetZ() const;
+		void SetX(Type x);
+		void SetY(Type y);
+		void SetZ(Type z);
 
-		MATHS_API std::string ToString() const;
-		MATHS_API Type Length() const;
-		MATHS_API Type LengthSquared() const;
+		std::string ToString() const;
+		Type Length() const;
+		Type LengthSquared() const;
 
-		MATHS_API void Negate(); // creates negation vector
+		void Negate(); // creates negation vector
 
-		MATHS_API Vector3D operator+(const Vector3D& v) const;
-		MATHS_API Vector3D operator-(const Vector3D& v) const;
-		MATHS_API Vector3D operator*(Type s) const;
-		MATHS_API Vector3D operator/(Type s) const;
+		Vector3D operator+(const Vector3D& v) const;
+		Vector3D operator-(const Vector3D& v) const;
+		Vector3D operator*(Type s) const;
+		Vector3D operator/(Type s) const;
 
-		MATHS_API Vector3D Normalized() const;
-		MATHS_API void Normalize();
+		Vector3D Normalized() const;
+		void Normalize();
 
-		MATHS_API Type Dot(const Vector3D& v) const;
-		MATHS_API Vector3D Cross(const Vector3D& v) const;
+		Type Dot(const Vector3D& v) const;
+		Vector3D Cross(const Vector3D& v) const;
 	};
 
 	template <typename Type>
-	class Vector4D
+	class MATHS_API Vector4D
 	{
 	protected: // member variables
 		Type x;
@@ -84,33 +84,33 @@ namespace Maths
 		Type z;
 		Type w;
 	public: // constructors and destructors
-		MATHS_API Vector4D();
-		MATHS_API Vector4D(Type x, Type y, Type z, Type w);
+		Vector4D();
+		Vector4D(Type x, Type y, Type z, Type w);
 	public: // public member functions
-		MATHS_API Type GetX() const;
-		MATHS_API Type GetY() const;
-		MATHS_API Type GetZ() const;
-		MATHS_API Type GetW() const;
-		MATHS_API void SetX(Type x);
-		MATHS_API void SetY(Type y);
-		MATHS_API void SetZ(Type z);
-		MATHS_API void SetW(Type w);
+		Type GetX() const;
+		Type GetY() const;
+		Type GetZ() const;
+		Type GetW() const;
+		void SetX(Type x);
+		void SetY(Type y);
+		void SetZ(Type z);
+		void SetW(Type w);
 
-		MATHS_API std::string ToString() const;
-		MATHS_API Type Length() const;
-		MATHS_API Type LengthSquared() const;
+		std::string ToString() const;
+		Type Length() const;
+		Type LengthSquared() const;
 
-		MATHS_API void Negate(); // creates negation vector
+		void Negate(); // creates negation vector
 
-		MATHS_API Vector4D operator+(const Vector4D& v) const;
-		MATHS_API Vector4D operator-(const Vector4D& v) const;
-		MATHS_API Vector4D operator*(Type s) const;
-		MATHS_API Vector4D operator/(Type s) const;
+		Vector4D operator+(const Vector4D& v) const;
+		Vector4D operator-(const Vector4D& v) const;
+		Vector4D operator*(Type s) const;
+		Vector4D operator/(Type s) const;
 
-		MATHS_API Vector4D Normalized() const;
-		MATHS_API void Normalize();
+		Vector4D Normalized() const;
+		void Normalize();
 
-		MATHS_API Type Dot(const Vector4D& v) const;
+		Type Dot(const Vector4D& v) const;
 	};
 	template class Vector2D<int>;
 	template class Vector2D<float>;
