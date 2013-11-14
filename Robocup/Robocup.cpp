@@ -111,7 +111,6 @@ int main(int argc, char* argv[])
 	//Game game2(commands);
 	game.ReadConfigFile();
 	game.OpenWindow("Window title");
-	game.SetMouseCursorEnabled(Config::GetValue("Cursor_input_mode", GLFW_CURSOR_HIDDEN));
 
 	game.Load();
 	/* ==================== Initialization end ==================== */
