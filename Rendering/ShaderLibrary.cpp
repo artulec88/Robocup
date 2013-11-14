@@ -9,9 +9,20 @@
 using namespace Rendering;
 using namespace Utils;
 
+/* static */ ShaderLibrary* ShaderLibrary::s_shaderLibrary = NULL;
+
+/* static */ ShaderLibrary* ShaderLibrary::GetShaderLibrary()
+{
+	return s_shaderLibrary;
+}
+
 ShaderLibrary::ShaderLibrary(void) :
 	m_isCompiled(false)
 {
+	if (s_shaderLibrary == NULL)
+	{
+		s_shaderLibrary = this;
+	}
 }
 
 
@@ -26,10 +37,10 @@ bool ShaderLibrary::IsCompiled() const
 
 /* static */void ShaderLibrary::AddShader(const std::string& strShaderName)
 {
-	if (GetSingletonPtr() == NULL)
+	if (GetShaderLibrary() == NULL)
 		return;
 
-	if (GetSingletonPtr()->IsCompiled())
+	if (GetShaderLibrary()->IsCompiled())
 	{
 		stdlog(Warning, LOGPLACE, "Shader library is already compiled");
 		return;
@@ -67,10 +78,10 @@ bool ShaderLibrary::IsCompiled() const
 		return;
 	}
 
-	GetSingletonPtr()->m_shaders.push_back(Shader(pName->GetValueString(), pVertex->GetValueString(), pFragment->GetValueString()));
-	GetSingletonPtr()->m_shaderNames[pName->GetValueString()] = GetSingletonPtr()->m_shaders.size() - 1;
+	GetShaderLibrary()->m_shaders.push_back(Shader(pName->GetValueString(), pVertex->GetValueString(), pFragment->GetValueString()));
+	GetShaderLibrary()->m_shaderNames[pName->GetValueString()] = GetShaderLibrary()->m_shaders.size() - 1;
 
-	auto& oShader = GetSingletonPtr()->m_shaders.back();
+	auto& oShader = GetShaderLibrary()->m_shaders.back();
 
 	for (std::vector<Data*>::const_iterator itr = pData->ChildrenBegin(); itr != pData->ChildrenEnd(); ++itr)
 	{

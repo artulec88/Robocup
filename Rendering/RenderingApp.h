@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Rendering.h"
+#include "Renderer.h"
 #include "Utils\CommandLine.h"
 #include "Singleton.h"
 #include <string>
@@ -9,46 +10,46 @@
 
 namespace Rendering
 {
-class RenderingApp : public Singleton<RenderingApp>
+class RENDERING_API RenderingApp
 {
 public: // constructors and destructors
-	RENDERING_API RenderingApp(Utils::CommandLine& commandLine);
-	RENDERING_API virtual ~RenderingApp(void);
+	RenderingApp(Utils::CommandLine& commandLine);
+	virtual ~RenderingApp(void);
 
 public: // public member functions
-	RENDERING_API void ReadConfigFile() const;
-	RENDERING_API bool HasCommandLineSwitch(const std::string& opt) const;
-	RENDERING_API std::string GetCommandLineSwitch(const std::string& opt) const;
+	void ReadConfigFile() const;
+	bool HasCommandLineSwitch(const std::string& opt) const;
+	std::string GetCommandLineSwitch(const std::string& opt) const;
 	
-	RENDERING_API void SetMultisampling(bool bMultisampling);
-	RENDERING_API bool IsMultisamplingEnabled() const;
+	void SetMultisampling(bool bMultisampling);
+	bool IsMultisamplingEnabled() const;
 
-	RENDERING_API void OpenWindow(const std::string& windowTitle, int width = 1024, int height = 768, bool bFullscreen = false, bool bResizable = false);
+	void OpenWindow(const std::string& windowTitle, int width = 1024, int height = 768, bool bFullscreen = false, bool bResizable = false);
 
-	RENDERING_API bool IsFullscreen() const;
-	RENDERING_API bool IsOpen() const;
-	RENDERING_API void SetMouseCursorEnabled(int value);
+	bool IsFullscreen() const;
+	bool IsOpen() const;
+	void SetMouseCursorEnabled(int value);
 
-	RENDERING_API void SwapBuffers();
-	RENDERING_API float GetTime();
+	void SwapBuffers();
+	float GetTime();
 
-	virtual RENDERING_API std::string WindowTitle() const;
-	virtual RENDERING_API std::string AppDirectory() const;
-	virtual RENDERING_API void CloseWindowEvent();
-	virtual RENDERING_API void ResizeWindowEvent(int width, int height);
-	virtual RENDERING_API void KeyEvent(int key, int scancode, int action, int mods);
-	virtual RENDERING_API void CharEvent(unsigned int codepoint);
-	virtual RENDERING_API void MouseInputEvent(int button, int action, int mods);
+	virtual std::string WindowTitle() const;
+	virtual std::string AppDirectory() const;
+	virtual void CloseWindowEvent();
+	virtual void ResizeWindowEvent(int width, int height);
+	virtual void KeyEvent(int key, int scancode, int action, int mods);
+	virtual void CharEvent(unsigned int codepoint);
+	virtual void MouseInputEvent(int button, int action, int mods);
 
-	class Renderer* CreateRenderer();
-	class Renderer* GetRenderer() const;
+	Renderer* CreateRenderer();
+	Renderer* GetRenderer() const;
 public:
-	//static RenderingApp* GetApp() { return s_renderingApp; };
-	RENDERING_API static void WindowCloseCallback(GLFWwindow* window);
-	RENDERING_API static void WindowResizeCallback(GLFWwindow* window, int width, int height);
-	RENDERING_API static void KeyEventCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
-	RENDERING_API static void CharEventCallback(GLFWwindow* window, unsigned int codepoint);
-	RENDERING_API static void MouseInputCallback(GLFWwindow* window, int button, int action, int mods);
+	static RenderingApp* GetApp();
+	static void WindowCloseCallback(GLFWwindow* window);
+	static void WindowResizeCallback(GLFWwindow* window, int width, int height);
+	static void KeyEventCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+	static void CharEventCallback(GLFWwindow* window, unsigned int codepoint);
+	static void MouseInputCallback(GLFWwindow* window, int button, int action, int mods);
 protected:
 	GLFWwindow* m_window;
 	int m_windowWidth;
@@ -62,7 +63,7 @@ protected:
 
 	Utils::CommandLine& m_commandLine;
 	Renderer* m_renderer;
-	//static RenderingApp* s_renderingApp;
+	static RenderingApp* s_renderingApp;
 };
 
 } /* end namespace Rendering */

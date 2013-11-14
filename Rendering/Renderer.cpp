@@ -16,6 +16,13 @@ using namespace Maths;
 using namespace Utils;
 using namespace std;
 
+/* static */ Renderer* Renderer::s_renderer = NULL;
+
+/* static */ Renderer* Renderer::GetRenderer()
+{
+	return s_renderer;
+}
+
 // TODO: Replace some default values with Config::GetValue
 Renderer::Renderer(int windowWidth, int windowHeight) :
 	m_windowWidth(windowWidth),
@@ -34,6 +41,11 @@ Renderer::Renderer(int windowWidth, int windowHeight) :
 	glGetIntegerv(GL_SAMPLES, &m_iScreenSamples);
 
 	SetSize(windowWidth, windowHeight);
+
+	if (s_renderer == NULL)
+	{
+		s_renderer = this;
+	}
 	stdlog(Info, LOGPLACE, "Renderer construction finished");
 }
 
@@ -160,22 +172,31 @@ void Renderer::ResizeWindow(int windowWidth, int windowHeight)
 	m_windowHeight = windowHeight;
 }
 
-//void Renderer::RenderGrid(const PointF &lower, const PointF &upper, float density, float level /* = 0.0f */, float start /* = 0.0f */, float end /* = 1.0f */) const
-//{
-//	float s = density * start;
-//	float e = density * end;
-// 	glBegin(GL_LINES);
-//	for (float z = lower.GetZ(); z <= upper.GetZ(); z+=density)
-//	{
-//		for (float x = lower.GetX(); x <= upper.GetX(); x+=density)
-//		{
-//			glVertex3f(x, 0, z + s);
-//			glVertex3f(x, 0, z + e);
-//		
-//			glVertex3f(x + s, 0, z);
-//			glVertex3f(x + e, 0, z);
-//		}
-//		
-//	}
-//	glEnd();
-//}
+void Renderer::RenderTriangle(const Maths::Point3Df& A, const Maths::Point3Df& B, const Maths::Point3Df& C) const
+{
+	glBegin(GL_TRIANGLES);
+	glVertex3f(A.GetX(), A.GetY(), A.GetZ());
+	glVertex3f(B.GetX(), B.GetY(), B.GetZ());
+	glVertex3f(C.GetX(), C.GetY(), C.GetZ());
+	glEnd();
+}
+
+void Renderer::RenderGrid(const Point3Df &lower, const Point3Df &upper, float density, float level /* = 0.0f */, float start /* = 0.0f */, float end /* = 1.0f */) const
+{
+	float s = density * start;
+	float e = density * end;
+ 	glBegin(GL_LINES);
+	for (float z = lower.GetZ(); z <= upper.GetZ(); z+=density)
+	{
+		for (float x = lower.GetX(); x <= upper.GetX(); x+=density)
+		{
+			glVertex3f(x, 0, z + s);
+			glVertex3f(x, 0, z + e);
+		
+			glVertex3f(x + s, 0, z);
+			glVertex3f(x + e, 0, z);
+		}
+		
+	}
+	glEnd();
+}

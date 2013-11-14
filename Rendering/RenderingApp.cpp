@@ -12,7 +12,12 @@
 using namespace Rendering;
 using namespace Utils;
 
-//RenderingApp* RenderingApp::s_renderingApp = NULL;
+RenderingApp* RenderingApp::s_renderingApp = NULL;
+
+/* static */ RenderingApp* RenderingApp::GetApp()
+{
+	return s_renderingApp;
+}
 
 RenderingApp::RenderingApp(CommandLine& commandLine) :
 	m_window(NULL),
@@ -27,6 +32,10 @@ RenderingApp::RenderingApp(CommandLine& commandLine) :
 	m_renderer(NULL)
 {
 	stdlog(Debug, LOGPLACE, "Rendering application construction started");
+	if (s_renderingApp == NULL)
+	{
+		s_renderingApp = this;
+	}
 	stdlog(Debug, LOGPLACE, "Rendering application construction finished");
 }
 
@@ -167,7 +176,7 @@ void RenderingApp::OpenWindow(const std::string& windowTitle,
 	glfwSwapInterval( 1 );
 	glfwSetTime( 0.0 );
 
-	SetMouseCursorEnabled(GLFW_CURSOR_DISABLED);
+	SetMouseCursorEnabled(Config::GetValue("Cursor_input_mode", GLFW_CURSOR_HIDDEN));
 
 	// Enable depth test
 	glEnable(GL_CULL_FACE | GL_DEPTH_TEST);
@@ -239,7 +248,7 @@ void RenderingApp::CloseWindowEvent()
 	//{
 	//	glfwSetWindowShouldClose(m_window, GL_FALSE);
 	//}
-	glfwSetWindowShouldClose(m_window, GL_FALSE);
+	glfwSetWindowShouldClose(m_window, GL_TRUE);
 }
 
 void RenderingApp::ResizeWindowEvent(int width, int height)
@@ -263,6 +272,11 @@ void RenderingApp::ResizeWindowEvent(int width, int height)
  */
 void RenderingApp::KeyEvent(int key, int scancode, int action, int mods)
 {
+	// see http://www.glfw.org/docs/3.0/group__keys.html
+	if (key == GLFW_KEY_SPACE)
+	{
+		exit(EXIT_SUCCESS);
+	}
 }
 
 void RenderingApp::CharEvent(unsigned int codepoint)
@@ -292,30 +306,30 @@ void RenderingApp::MouseInputEvent(int button, int action, int mods)
  */
 /* static */ void RenderingApp::WindowCloseCallback(GLFWwindow* window)
 {
-	GetSingletonPtr()->CloseWindowEvent();
+	GetApp()->CloseWindowEvent();
 	//GetApp()->CloseWindowEvent();
 }
 
 /* static */ void RenderingApp::WindowResizeCallback(GLFWwindow* window, int width, int height)
 {
-	GetSingletonPtr()->ResizeWindowEvent(width, height);
+	GetApp()->ResizeWindowEvent(width, height);
 	//GetApp()->ResizeWindowEvent(width, height);
 }
 
 /* static */ void RenderingApp::KeyEventCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-	GetSingletonPtr()->KeyEvent(key, scancode, action, mods);
+	GetApp()->KeyEvent(key, scancode, action, mods);
 	//GetApp()->KeyEvent(key, scancode, action, mods);
 }
 
 /* static */ void RenderingApp::CharEventCallback(GLFWwindow* window, unsigned int codepoint)
 {
-	GetSingletonPtr()->CharEvent(codepoint);
+	GetApp()->CharEvent(codepoint);
 	//GetApp()->CharEvent(codepoint);
 }
 
 /* static */ void RenderingApp::MouseInputCallback(GLFWwindow* window, int button, int action, int mods)
 {
-	GetSingletonPtr()->MouseInputEvent(button, action, mods);
+	GetApp()->MouseInputEvent(button, action, mods);
 	//GetApp()->MouseInputEvent(button, action, mods);
 }

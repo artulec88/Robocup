@@ -6,21 +6,23 @@
 
 namespace Rendering
 {
-	class Renderer : public Singleton<Renderer>
+	class RENDERING_API Renderer
 	{
 	public: // constructors and destructors
-		RENDERING_API Renderer(int windowWidth, int windowHeight);
-		RENDERING_API ~Renderer(void);
+		Renderer(int windowWidth, int windowHeight);
+		~Renderer(void);
 
 	protected:
 		bool IsHardwareSupported();
 
 	public:
-		RENDERING_API void SetSize(int windowWidth, int windowHeight);
-		RENDERING_API void LoadShaders();
-		RENDERING_API virtual void Init();
-		RENDERING_API virtual void ResizeWindow(int windowWidth, int windowHeight);
-		//RENDERING_API void RenderGrid(const Maths::PointF& lower, const Maths::PointF& upper, float density, float level = 0.0f, float start = 0.0f, float end = 1.0f) const;
+		Renderer* GetRenderer();
+		void SetSize(int windowWidth, int windowHeight);
+		void LoadShaders();
+		virtual void Init();
+		virtual void ResizeWindow(int windowWidth, int windowHeight);
+		void RenderTriangle(const Maths::Point3Df& A, const Maths::Point3Df& B, const Maths::Point3Df& C) const;
+		void RenderGrid(const Maths::Point3Df& lower, const Maths::Point3Df& upper, float density, float level = 0.0f, float start = 0.0f, float end = 1.0f) const;
 	protected:
 		int m_windowWidth;
 		int m_windowHeight;
@@ -33,6 +35,8 @@ namespace Rendering
 
 		bool m_MultisampleTexturesEnabled;
 		int m_iScreenSamples;
+
+		static Renderer* s_renderer;
 	};
 }
 

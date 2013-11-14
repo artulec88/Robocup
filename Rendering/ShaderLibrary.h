@@ -11,18 +11,21 @@
 namespace Rendering
 {
 // TODO: This class should be a singleton
-class ShaderLibrary : public Singleton<ShaderLibrary>
+class RENDERING_API ShaderLibrary
 {
 public: /* constructors and destructors */
-	RENDERING_API ShaderLibrary(void);
-	RENDERING_API ~ShaderLibrary(void);
+	ShaderLibrary(void);
+	~ShaderLibrary(void);
 public: /* static functions */
+	static ShaderLibrary* GetShaderLibrary();
 	static void AddShader(const std::string& strShaderName);
 public: /* public function members */
-	RENDERING_API bool IsCompiled() const;
+	bool IsCompiled() const;
 protected: /* protected member variables */
 	std::map<std::string, unsigned int> m_shaderNames;
 	std::vector<Shader> m_shaders;
 	bool m_isCompiled;
+
+	static ShaderLibrary* s_shaderLibrary;
 };
 } /* end namespace Rendering */
