@@ -140,6 +140,7 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CameraPosition.cpp" />
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="DataSerializer.cpp" />
     <ClCompile Include="dllmain.cpp">
@@ -161,9 +162,9 @@
     <ClCompile Include="RenderingApp.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderLibrary.cpp" />
-    <ClCompile Include="Singleton.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CameraPosition.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="DataSerializer.h" />
     <ClInclude Include="Entity.h" />
@@ -172,7 +173,6 @@
     <ClInclude Include="RenderingApp.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderLibrary.h" />
-    <ClInclude Include="Singleton.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Maths\Maths.vcxproj">

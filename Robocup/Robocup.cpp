@@ -11,6 +11,7 @@
 /* MATHS begin */
 #include "Maths\Maths.h"
 #include "Maths\Vector.h"
+#include "Maths\Matrix.h"
 /* MATHS end */
 
 /* RENDERING begin */
@@ -26,7 +27,7 @@
 #include "Utils\CommandLine.h"
 /* UTILS end */
 
-//#define TESTING_ENABLED
+#define TESTING_ENABLED
 
 using namespace std;
 using namespace Utils;
@@ -93,6 +94,9 @@ int main(int argc, char* argv[])
 	float camera_near = Utils::Config::GetValue("camera_near", 0.005f);
 	//int camera_near = Utils::Config::GetValue(1);
 	cout << "camera_near = " << camera_near << endl;
+
+	Maths::Matrix4Df m = Maths::Matrix4Df::Identity();
+	cout << "Matrix = " << endl << m.ToString() << endl;
 	system("PAUSE");
 	return 0;
 	/* Testing end */

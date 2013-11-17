@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Maths\Vector.h"
+#include "Maths\Matrix.h"
 
 namespace Rendering
 {
@@ -19,5 +20,8 @@ public: // public member functions
 protected: // protected member variables
 	Maths::Point3Df position;
 	Maths::Vector3Df direction;
+
+	Maths::Matrix4Df Model;
+	Maths::Matrix4Df View;
 };
 } /* end namespace Rendering */

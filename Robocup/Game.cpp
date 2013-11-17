@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Utils\Log.h"
+#include "Maths\Vector.h"
 
 using namespace Rendering;
 using namespace Utils;
@@ -27,23 +28,23 @@ void Game::GameLoop()
 {
 	stdlog(Notice, LOGPLACE, "Main game loop started");
 
-	if (RenderingApp::GetSingletonPtr() == NULL)
+	if (GetApp() == NULL)
 	{
 		stdlog(Error, LOGPLACE, "Rendering application is NULL before Game Loop even started");
 		return;
 	}
 
 	float previousTime = 0.0f;
-	float currentTime = RenderingApp::GetSingletonPtr()->GetTime();
+	float currentTime = GetApp()->GetTime();
 	while (true)
 	{
-		if (RenderingApp::GetSingletonPtr() == NULL)
+		if (GetApp() == NULL)
 		{
 			stdlog(Critical, LOGPLACE, "Rendering application is NULL");
 			break;
 		}
 		previousTime = currentTime;
-		currentTime = RenderingApp::GetSingletonPtr()->GetTime();
+		currentTime = GetApp()->GetTime();
 
 		float dt = currentTime - previousTime;
 		if (dt > 0.15f)
@@ -61,12 +62,17 @@ void Game::GameLoop()
 
 void Game::Update(float dt)
 {
-	stdlog(Info, LOGPLACE, "Function not yet implemented");
+	//stdlog(Info, LOGPLACE, "Function not yet implemented");
 }
 
 void Game::Draw()
 {
-	stdlog(Info, LOGPLACE, "Function not yet implemented");
+	//stdlog(Info, LOGPLACE, "Function not yet implemented");
+
+	GetRenderer()->RenderGrid(Maths::Point3Df(0.0f, 0.0f, 0.0f), Maths::Point3Df(15.0f, 15.0f, 15.0f), 0.01f);
+	GetRenderer()->RenderTriangle(Maths::Point3Df(0.0f, 0.0f, 0.0f), Maths::Point3Df(1.0f, 1.0f, 1.0f), Maths::Point3Df(2.0f, 2.0f, 2.0f));
+
+	GetApp()->SwapBuffers();
 }
 
 void Game::CloseWindowEvent()
